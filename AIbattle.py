@@ -4,7 +4,7 @@ import time
 # Game configuration
 INITIAL_STICKS = 21
 CHOICES = [1, 2, 3]
-TRAINING_GAMES = 1000000
+TRAINING_GAMES = 10000
 
 # Initialize two AI agents with their own weights (with slight random variations)
 ai1_weights = [[1 + random()*0.1, 1 + random()*0.1, 1 + random()*0.1] for _ in range(INITIAL_STICKS)]

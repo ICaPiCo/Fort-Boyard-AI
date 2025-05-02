@@ -1,1 +1,2 @@
-class AI:
+from random import *
+

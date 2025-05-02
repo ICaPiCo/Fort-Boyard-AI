@@ -1,3 +1,4 @@
+from random import*
 class game:
     def __init__():
         pass

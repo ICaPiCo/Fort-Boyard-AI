@@ -57,6 +57,13 @@ def player_play():
     show_board()
     return current_sticks == 0
 
+def reset():
+    global board, weights, claude_moves, current_sticks, player_turn
+    board = ["|" for _ in range(21)]
+    claude_moves = []
+    current_sticks = len(board)
+    player_turn = choice(False,True)
+
 # Main game loop
 print("NIM Game - Don't take the last stick!")
 print("Start with 21 sticks, take 1-3 each turn")
@@ -68,18 +75,26 @@ while True:
         if game_over:
             print("\nYou took the last stick - Claude wins!")
             update_weights(True)  # Claude wins
-            break
+            if input("Play again? (y/n): ").lower() != 'y':
+                break
+            else:
+                reset()
     else:
         game_over = claude_play()
         if game_over:
             print("\nClaude took the last stick - You win!")
             update_weights(False)  # Claude loses
-            break
+            if input("Play again? (y/n): ").lower() != 'y':
+                break
+            else:
+                reset()
     
     player_turn = not player_turn
 
 # Show final weights
 print("\nClaude's learned weights:")
-print("Sticks | 1 | 2 | 3")
+print("Sticks || 1 | 2 | 3")
+print("=======||===|===|===")
 for i in range(min(10, len(weights))):  # Show first 10 positions
-    print(f"{i+1:6} | {weights[i][0]} | {weights[i][1]} | {weights[i][2]}")
+    print(f"{i+1:6} || {weights[i][0]} | {weights[i][1]} | {weights[i][2]}")
+    print("-------||---|---|---")
